@@ -8,7 +8,7 @@ ThisBuild / organization     := "net.nergi"
 ThisBuild / organizationName := "nergi"
 
 lazy val sbtAssemblySettings = baseAssemblySettings ++ Seq(
-  assembly / assemblyOutputPath    := baseDirectory.value / "wacc-compiler.jar",
+  assembly / assemblyOutputPath    := baseDirectory.value / "eternity-wrapper.jar",
   assembly / assemblyMergeStrategy := {
     case PathList("META-INF", _ @_*) => MergeStrategy.discard
     case _                           => MergeStrategy.first
