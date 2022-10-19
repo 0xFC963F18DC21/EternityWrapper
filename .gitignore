@@ -1,0 +1,7 @@
+# SBT junk.
+/.bsp/
+target/
+
+# Java outputs.
+*.class
+*.jar
