@@ -1,5 +1,7 @@
 package net.nergi.eternitywrapper.model
 
+import java.net.InetAddress
+
 // More info found at https://eternity.youfailit.net/wiki/List_of_command_line_parameters
 
 /** Represents a single command line argument passed into the program. */
@@ -142,4 +144,138 @@ object Warp {
   case class WarpNS(name: String) extends WarpKind
 }
 
-// TODO: Fill in the rest.
+// Miscellaneous options.
+case class Affinity(mask: Int) extends Option {
+  override def name: String = "mask"
+  
+  override protected def serialiseContent: String = mask.toString()
+}
+
+case object Blockmap extends Flag {
+  override def name: String = "blockmap"
+}
+
+case object GrabMouse extends Flag {
+  override def name: String = "grabmouse"
+}
+
+case object NoGrabMouse extends Flag {
+  override def name: String = "nograbmouse"
+}
+
+case class NumParticles(count: Int) extends Option {
+  override def name: String = "numparticles"
+  
+  override protected def serialiseContent: String = count.toString()
+}
+
+case class Speed(percent: Int) extends Option {
+  override def name: String = "speed"
+  
+  override protected def serialiseContent: String = percent.toString()
+}
+
+case object StatCopy extends Flag {
+  override def name: String = "statcopy"
+}
+
+// Multiplayer options.
+case object AltDeath extends Flag {
+  override def name: String = "altdeath"
+}
+
+case object AustinVirtualGaming extends Flag {
+  override def name: String = "avg"
+}
+
+case object Deathmatch extends Flag {
+  override def name: String = "deathmatch"
+}
+
+case class DmFlags(flags: Int) extends Option {
+  override def name: String = "dmflags"
+  
+  override protected def serialiseContent: String = flags.toString()
+}
+
+case object ExtraTic extends Flag {
+  override def name: String = "extratic"
+}
+
+case class Net(player: Int, ips: InetAddress*) extends Option {
+  override def name: String = "net"
+  
+  override protected def serialiseContent: String = s"$player " + ips.map(_.getHostAddress()).mkString(" ")
+}
+
+case class Port(port: Int) extends Option {
+  override def name: String = "port"
+  
+  override protected def serialiseContent: String = port.toString()
+}
+
+case class Timer(mins: Int) extends Option {
+  override def name: String = "timer"
+  
+  override protected def serialiseContent: String = mins.toString()
+}
+
+case object TriDeath extends Flag {
+  override def name: String = "trideath"
+}
+
+// Savegame options.
+case class LoadGame(slot: Int) extends Option {
+  override def name: String = "loadgame"
+  
+  override protected def serialiseContent: String = slot.toString()
+}
+
+case class Save(savepath: String) extends Option {
+  override def name: String = "save"
+  
+  override protected def serialiseContent: String = wrap(savepath)
+}
+
+// Video options.
+case object EightIn32 extends Flag {
+  override def name: String = "8in32"
+}
+
+case object DirectX extends Flag {
+  override def name: String = "directx"
+}
+
+case object Frame extends Flag {
+  override def name: String = "frame"
+}
+
+case object Fullscreen extends Flag {
+  override def name: String = "fullscreen"
+}
+
+case object GDI extends Flag {
+  override def name: String = "gdi"
+}
+
+case class Geom(width: Int, height: Int, flags: Geom.GeomFlag*) extends Option {
+  override def name: String = "geom"
+  
+  override protected def serialiseContent: String = s"${width}x${height}" + flags.mkString
+}
+
+case object Geom {
+  sealed abstract class GeomFlag(val repr: Char) {
+    override def toString(): String = s"$repr"
+  }
+
+  case object Windowed extends GeomFlag('w')
+  case object Fullscreen extends GeomFlag('f')
+  case object DesktopFullscreen extends GeomFlag('d')
+  case object PageFlipUpdates extends GeomFlag('v')
+  case object SoftwareSurface extends GeomFlag('s')
+  case object HardwareSurface extends GeomFlag('h')
+  case object Frameless extends GeomFlag('n')
+}
+
+// TODO: fill in the rest.
