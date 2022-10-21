@@ -114,7 +114,7 @@ case object SoloNet extends Flag {
   override def name: String = "solo-net"
 }
 
-case class SpecHit(num: Int) extends Option {
+case class SpecHit(num: BigInt) extends Option {
   override def name: String = "spechit"
 
   override protected def serialiseContent: String = num.toString()
@@ -278,4 +278,172 @@ case object Geom {
   case object Frameless extends GeomFlag('n')
 }
 
-// TODO: fill in the rest.
+case object Hardware extends Flag {
+  override def name: String = "hardware"
+}
+
+case object NoBlit extends Flag {
+  override def name: String = "noblit"
+}
+
+case object NoDraw extends Flag {
+  override def name: String = "nodraw"
+}
+
+case object NoFrame extends Flag {
+  override def name: String = "noframe"
+}
+
+case object NoFullscreen extends Flag {
+  override def name: String = "nofullscreen"
+}
+
+case object NoVSync extends Flag {
+  override def name: String = "novsync"
+}
+
+case object Software extends Flag {
+  override def name: String = "software"
+}
+
+case class VHeight(height: Int) extends Option {
+  override def name: String = "vheight"
+  
+  override protected def serialiseContent: String = height.toString()
+}
+
+case object VSync extends Flag {
+  override def name: String = "vsync"
+}
+
+case class VWidth(width: Int) extends Option {
+  override def name: String = "vwidth"
+
+  override protected def serialiseContent: String = width.toString()
+}
+
+case object Window extends Flag {
+  override def name: String = "window"
+}
+
+// WAD and file options.
+case class Base(basepath: String) extends Option {
+  override def name: String = "base"
+  
+  override protected def serialiseContent: String = wrap(basepath)
+}
+
+case class Config(configpath: String) extends Option {
+  override def name: String = "config"
+  
+  override protected def serialiseContent: String = wrap(configpath)
+}
+
+case class Disk(diskpath: String) extends Option {
+  override def name: String = "disk"
+  
+  override protected def serialiseContent: String = wrap(diskpath)
+}
+
+case class DataFile(files: String*) extends Option {
+  override def name: String = "file"
+  
+  override protected def serialiseContent: String = files.map(wrap).mkString(" ")
+}
+
+case class Game(gamename: String) extends Option {
+  override def name: String = "game"
+  
+  override protected def serialiseContent: String = gamename
+}
+
+case class GFS(scriptpath: String) extends Option {
+  override def name: String = "gfs"
+  
+  override protected def serialiseContent: String = wrap(scriptpath)
+}
+
+case class IWAD(wadpath: String) extends Option {
+  override def name: String = "iwad"
+  
+  override protected def serialiseContent: String = wrap(wadpath)
+}
+
+case object NoLoad extends Flag {
+  override def name: String = "noload"
+}
+
+case object NoWADHacks extends Flag {
+  override def name: String = "nowadhacks"
+}
+
+case object ShowHashes extends Flag {
+  override def name: String = "showhashes"
+}
+
+case class User(userpath: String) extends Option {
+  override def name: String = "user"
+  
+  override protected def serialiseContent: String = wrap(userpath)
+}
+
+// Demo options.
+case class DemoLog(logpath: String) extends Option {
+  override def name: String = "demolog"
+  
+  override protected def serialiseContent: String = wrap(logpath)
+}
+
+case class Donut(height: Long = 0xF1000000, pic: Int = 7) extends Option {
+  override def name: String = "donut"
+  
+  override protected def serialiseContent: String = s"${height.toHexString} $pic"
+}
+
+case class FastDemo(demopath: String) extends Option {
+  override def name: String = "fastdemo"
+  
+  override protected def serialiseContent: String = wrap(demopath)
+}
+
+case object LongTics extends Flag {
+  override def name: String = "longtics"
+}
+
+case class MaxDemo(buflimit: Int) extends Option {
+  override def name: String = "maxdemo"
+  
+  override protected def serialiseContent: String = buflimit.toString()
+}
+
+case class Play(demopath: String) extends Option {
+  override def name: String = "play"
+  
+  override protected def serialiseContent: String = wrap(demopath)
+}
+
+case class Record(demopath: String) extends Option {
+  override def name: String = "record"
+  
+  override protected def serialiseContent: String = wrap(demopath)
+}
+
+case class RecordFromTo(demo1: String, demo2: String) extends Option {
+  override def name: String = "recordfromto"
+  
+  override protected def serialiseContent: String = s"${wrap(demo1)} ${wrap(demo2)}"
+}
+
+case object RejectPadWithFF extends Flag {
+  override def name: String = "reject_pad_with_ff"
+}
+
+case class TimeDemo(demopath: String) extends Option {
+  override def name: String = "timedemo"
+  
+  override protected def serialiseContent: String = wrap(demopath)
+}
+
+case object Vanilla extends Flag {
+  override def name: String = "vanilla"
+}
