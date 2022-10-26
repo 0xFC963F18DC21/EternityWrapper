@@ -1,6 +1,7 @@
 # SBT junk.
 /.bsp/
 target/
+/dist-newstyle/
 
 # Java outputs.
 *.class

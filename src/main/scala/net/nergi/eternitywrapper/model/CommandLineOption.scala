@@ -83,13 +83,13 @@ case object Dog extends Flag {
 case class Dogs(num: Int) extends Option {
   override def name: String = "dogs"
 
-  override protected def serialiseContent: String = num.toString()
+  override protected def serialiseContent: String = num.toString
 }
 
 case class Episode(num: Int) extends Option {
   override def name: String = "episode"
 
-  override protected def serialiseContent: String = num.toString()
+  override protected def serialiseContent: String = num.toString
 }
 
 case object Fast extends Flag {
@@ -107,7 +107,7 @@ case object Respawn extends Flag {
 case class Skill(level: Int) extends Option {
   override def name: String = "skill"
 
-  override protected def serialiseContent: String = level.toString()
+  override protected def serialiseContent: String = level.toString
 }
 
 case object SoloNet extends Flag {
@@ -117,13 +117,13 @@ case object SoloNet extends Flag {
 case class SpecHit(num: BigInt) extends Option {
   override def name: String = "spechit"
 
-  override protected def serialiseContent: String = num.toString()
+  override protected def serialiseContent: String = num.toString
 }
 
 case class Turbo(factor: Int) extends Option {
   override def name: String = "turbo"
 
-  override protected def serialiseContent: String = factor.toString()
+  override protected def serialiseContent: String = factor.toString
 }
 
 case class Warp(where: Warp.WarpKind) extends Option {
@@ -131,7 +131,7 @@ case class Warp(where: Warp.WarpKind) extends Option {
 
   override protected def serialiseContent: String = where match {
     case Warp.WarpEM(e, m) => s"$e $m"
-    case Warp.WarpM(m)     => m.toString()
+    case Warp.WarpM(m)     => m.toString
     case Warp.WarpNS(n)    => n
   }
 }
@@ -147,8 +147,8 @@ object Warp {
 // Miscellaneous options.
 case class Affinity(mask: Int) extends Option {
   override def name: String = "mask"
-  
-  override protected def serialiseContent: String = mask.toString()
+
+  override protected def serialiseContent: String = mask.toString
 }
 
 case object Blockmap extends Flag {
@@ -165,14 +165,14 @@ case object NoGrabMouse extends Flag {
 
 case class NumParticles(count: Int) extends Option {
   override def name: String = "numparticles"
-  
-  override protected def serialiseContent: String = count.toString()
+
+  override protected def serialiseContent: String = count.toString
 }
 
 case class Speed(percent: Int) extends Option {
   override def name: String = "speed"
-  
-  override protected def serialiseContent: String = percent.toString()
+
+  override protected def serialiseContent: String = percent.toString
 }
 
 case object StatCopy extends Flag {
@@ -194,8 +194,8 @@ case object Deathmatch extends Flag {
 
 case class DmFlags(flags: Int) extends Option {
   override def name: String = "dmflags"
-  
-  override protected def serialiseContent: String = flags.toString()
+
+  override protected def serialiseContent: String = flags.toString
 }
 
 case object ExtraTic extends Flag {
@@ -204,20 +204,21 @@ case object ExtraTic extends Flag {
 
 case class Net(player: Int, ips: InetAddress*) extends Option {
   override def name: String = "net"
-  
-  override protected def serialiseContent: String = s"$player " + ips.map(_.getHostAddress()).mkString(" ")
+
+  override protected def serialiseContent: String =
+    s"$player " + ips.map(_.getHostAddress()).mkString(" ")
 }
 
 case class Port(port: Int) extends Option {
   override def name: String = "port"
-  
-  override protected def serialiseContent: String = port.toString()
+
+  override protected def serialiseContent: String = port.toString
 }
 
 case class Timer(mins: Int) extends Option {
   override def name: String = "timer"
-  
-  override protected def serialiseContent: String = mins.toString()
+
+  override protected def serialiseContent: String = mins.toString
 }
 
 case object TriDeath extends Flag {
@@ -227,13 +228,13 @@ case object TriDeath extends Flag {
 // Savegame options.
 case class LoadGame(slot: Int) extends Option {
   override def name: String = "loadgame"
-  
-  override protected def serialiseContent: String = slot.toString()
+
+  override protected def serialiseContent: String = slot.toString
 }
 
 case class Save(savepath: String) extends Option {
   override def name: String = "save"
-  
+
   override protected def serialiseContent: String = wrap(savepath)
 }
 
@@ -260,7 +261,7 @@ case object GDI extends Flag {
 
 case class Geom(width: Int, height: Int, flags: Geom.GeomFlag*) extends Option {
   override def name: String = "geom"
-  
+
   override protected def serialiseContent: String = s"${width}x${height}" + flags.mkString
 }
 
@@ -308,8 +309,8 @@ case object Software extends Flag {
 
 case class VHeight(height: Int) extends Option {
   override def name: String = "vheight"
-  
-  override protected def serialiseContent: String = height.toString()
+
+  override protected def serialiseContent: String = height.toString
 }
 
 case object VSync extends Flag {
@@ -319,7 +320,7 @@ case object VSync extends Flag {
 case class VWidth(width: Int) extends Option {
   override def name: String = "vwidth"
 
-  override protected def serialiseContent: String = width.toString()
+  override protected def serialiseContent: String = width.toString
 }
 
 case object Window extends Flag {
@@ -329,43 +330,43 @@ case object Window extends Flag {
 // WAD and file options.
 case class Base(basepath: String) extends Option {
   override def name: String = "base"
-  
+
   override protected def serialiseContent: String = wrap(basepath)
 }
 
 case class Config(configpath: String) extends Option {
   override def name: String = "config"
-  
+
   override protected def serialiseContent: String = wrap(configpath)
 }
 
 case class Disk(diskpath: String) extends Option {
   override def name: String = "disk"
-  
+
   override protected def serialiseContent: String = wrap(diskpath)
 }
 
 case class DataFile(files: String*) extends Option {
   override def name: String = "file"
-  
+
   override protected def serialiseContent: String = files.map(wrap).mkString(" ")
 }
 
 case class Game(gamename: String) extends Option {
   override def name: String = "game"
-  
+
   override protected def serialiseContent: String = gamename
 }
 
 case class GFS(scriptpath: String) extends Option {
   override def name: String = "gfs"
-  
+
   override protected def serialiseContent: String = wrap(scriptpath)
 }
 
 case class IWAD(wadpath: String) extends Option {
   override def name: String = "iwad"
-  
+
   override protected def serialiseContent: String = wrap(wadpath)
 }
 
@@ -383,26 +384,26 @@ case object ShowHashes extends Flag {
 
 case class User(userpath: String) extends Option {
   override def name: String = "user"
-  
+
   override protected def serialiseContent: String = wrap(userpath)
 }
 
 // Demo options.
 case class DemoLog(logpath: String) extends Option {
   override def name: String = "demolog"
-  
+
   override protected def serialiseContent: String = wrap(logpath)
 }
 
-case class Donut(height: Long = 0xF1000000, pic: Int = 7) extends Option {
+case class Donut(height: Long = 0xf1000000, pic: Int = 7) extends Option {
   override def name: String = "donut"
-  
+
   override protected def serialiseContent: String = s"${height.toHexString} $pic"
 }
 
 case class FastDemo(demopath: String) extends Option {
   override def name: String = "fastdemo"
-  
+
   override protected def serialiseContent: String = wrap(demopath)
 }
 
@@ -412,25 +413,25 @@ case object LongTics extends Flag {
 
 case class MaxDemo(buflimit: Int) extends Option {
   override def name: String = "maxdemo"
-  
-  override protected def serialiseContent: String = buflimit.toString()
+
+  override protected def serialiseContent: String = buflimit.toString
 }
 
 case class Play(demopath: String) extends Option {
   override def name: String = "play"
-  
+
   override protected def serialiseContent: String = wrap(demopath)
 }
 
 case class Record(demopath: String) extends Option {
   override def name: String = "record"
-  
+
   override protected def serialiseContent: String = wrap(demopath)
 }
 
 case class RecordFromTo(demo1: String, demo2: String) extends Option {
   override def name: String = "recordfromto"
-  
+
   override protected def serialiseContent: String = s"${wrap(demo1)} ${wrap(demo2)}"
 }
 
@@ -440,7 +441,7 @@ case object RejectPadWithFF extends Flag {
 
 case class TimeDemo(demopath: String) extends Option {
   override def name: String = "timedemo"
-  
+
   override protected def serialiseContent: String = wrap(demopath)
 }
 
