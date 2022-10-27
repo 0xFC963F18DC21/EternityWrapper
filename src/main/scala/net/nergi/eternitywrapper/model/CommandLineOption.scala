@@ -268,12 +268,12 @@ case object GDI extends Flag {
 case class Geom(width: Int, height: Int, flags: Geom.GeomFlag*) extends Option {
   override def name: String = "geom"
 
-  override protected def serialiseContent: String = s"${width}x${height}" + flags.mkString
+  override protected def serialiseContent: String = s"${width}x$height" + flags.mkString
 }
 
 case object Geom {
   sealed abstract class GeomFlag(val repr: Char) {
-    override def toString(): String = s"$repr"
+    override def toString: String = s"$repr"
   }
 
   case object Windowed extends GeomFlag('w')
