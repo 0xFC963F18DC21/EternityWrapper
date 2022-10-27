@@ -202,6 +202,12 @@ case object ExtraTic extends Flag {
   override def name: String = "extratic"
 }
 
+case class Frags(limit: Int) extends Option {
+  override def name: String = "frags"
+
+  override protected def serialiseContent: String = limit.toString
+}
+
 case class Net(player: Int, ips: InetAddress*) extends Option {
   override def name: String = "net"
 
